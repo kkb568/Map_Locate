@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style/mapLocate/mapLocate.css">
+    <title>Document</title>
+    <script>
+        var modal = document.getElementById("modal");
+
+        function initMap() {
+            // Get user's coordinates.
+            const LatLong = { lat: {{userLat}}, lng: {{userLong}} };
+            // Image used to create the user's marker.
+            const image = "http://maps.google.com/mapfiles/ms/icons/blue-dot.png";
+            // Image used to create the other user's marker(s).
+            const image1 = "http://maps.google.com/mapfiles/ms/icons/green-dot.png";
+            // Create map.
+            const map = new google.maps.Map(document.getElementById("map"), {
+                zoom: 7,
+                center: LatLong,
+            });
+            var coordinates = document.getElementsByClassName("coordinates");
+            // If other user exists, create the markers for the user and other users.
+            if (coordinates.length != 0) {
+                for (var i=0; i<coordinates.length; i++) {
+                    var latslongs = coordinates[i].innerText.split(",");
+                    var otherCoordinates = {lat: parseFloat(latslongs[0]), lng: parseFloat(latslongs[1])};
+                    var otherUsersMarkers = new google.maps.Marker({
+                        position: otherCoordinates,
+                        map,
+                        icon: image1
+                    });
+                    otherUsersMarkers.addListener("click", () => {
+                        const infoWindow = new google.maps.InfoWindow();
+                        infoWindow.close();
+                        infoWindow.setContent('<div class="connect"><p>Would you like to connect to the user?</p><button>Yes</button></div>');
+                        infoWindow.open(otherUsersMarkers.getMap(), otherUsersMarkers);
+
+                    });
+                }
+            }
+            const userMarker = new google.maps.Marker({
+                position: LatLong,
+                map,
+                icon: image
+            });
+        }
+        window.initMap = initMap;
+
+        function closeModal() {
+            modal.style.opacity = "0";
+            modal.style.zIndex = "-1";
+        }
+    </script>
+</head>
+<body>
+   <div id="map"></div>
+   {{#coordinates}}
+        <p hidden class="coordinates">{{lat}},{{long}}</p>
+   {{/coordinates}}
+   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDRp4xxY4Fknl1ELLGtc56Qc6LlimajFLM&callback=initMap"></script>
+</body>
+</html>

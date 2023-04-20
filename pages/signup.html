@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style/signUp/signUp.css">
+    <title>Sign-up</title>
+    <script src="signUp.js"></script>
+</head>
+<body>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <div class="container">
+        <div class="outer-container">
+            <div class="inner-container">
+                <h2 style="text-align: center;">Sign-up using your ALU email address.</h2>
+                <div class="signUp-details">
+                    <div id="g_id_onload"
+                        data-client_id="223292403996-9au02nhfodf1qbg6bsl127v8lci89859.apps.googleusercontent.com"
+                        data-login_uri="http://localhost:3000/signIn"
+                        data-auto_prompt="false">
+                    </div>
+                    <div class="g_id_signin"
+                        data-type="standard"
+                        data-size="large"
+                        data-theme="outline"
+                        data-text="signup_with"
+                        data-shape="rectangular"
+                        data-logo_alignment="left"
+                        data-click_listener="onSignIn">
+                    </div>
+                    <p>New user? Login here</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

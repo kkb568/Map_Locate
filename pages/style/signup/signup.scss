@@ -1,0 +1,44 @@
+$ALU-blue: rgb(0, 46, 109);
+
+@font-face {
+    font-family: Montserrat;
+    src: url(Montserrat-Medium.ttf);
+}
+
+body {
+    font-family: Montserrat;
+}
+
+.container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    min-height: 100%;
+    background-color: rgb(213, 234, 255);
+    display: table;
+}
+
+.outer-container {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.inner-container {
+    margin:auto;
+    width: 600px;
+    height: auto;
+    background-color: white;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.signUp-details {
+    margin-left: 30%;
+}
+
+@media screen and (max-width: 600px) {
+    .inner-container {
+        width: 300px;
+    }
+}

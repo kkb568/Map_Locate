@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style/locateForm/locateForm.css">
+    <script src="locateForm.js"></script>
+    <title>Locate form</title>
+</head>
+<body>
+    <div class="container">
+        <div class="inner-container">
+            <div class="top-side">
+                <h1>Fill in the form below to sign in</h1>
+            </div>
+            <div class="bottom-side">
+                <form id="mapLocate" action="/mapLocatePage" method="post">
+                    <label for="username">Username (not your actual name): </label><br>
+                    <input type="text" name="username" id="username" required><br><br>
+                    <label for="country">Country: </label><br>
+                    <select id="country" name="country" onchange="getSelectedCountry()" required></select><br><br>
+                    <label for="state">State/province: </label><br>
+                    <select id="state" name="state" required></select><br><br>
+                    <label for="city">City/town/district: </label><br>
+                    <input type="text" name="city" id="city" placeholder="e.g Claremont, Cape Town" required><br><br>
+                    <input type="checkbox" id="confirm" name="confirm" value="confirm" required>
+                    <label for="confirm">I agree to the privacy policy. Click here to see the policy.</label><br><br>
+                    <button id="submit">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

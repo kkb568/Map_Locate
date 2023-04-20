@@ -1,0 +1,41 @@
+$ALU-blue: rgb(0, 46, 109);
+
+@font-face {
+    font-family: Montserrat;
+    src: url(Montserrat-Medium.ttf);
+}
+
+body {
+    font-family: Montserrat;
+}
+
+#map {
+    position: absolute;
+    left: 0%;
+    top: 0%;
+    width: 100%; 
+    height: 100%;
+}
+
+.connect {
+    padding: 5px;
+    font-family: Montserrat;
+
+    button {
+        font-family: Montserrat;
+        font-size: medium;
+        cursor: pointer;
+        background-color: $ALU-blue;
+        border: none;
+        padding: 5px;
+        color: white;
+        border-radius: 5px;
+        transition: all 0.3s ease;
+    }
+
+    button:hover {
+        background-color: transparent;
+        color: $ALU-blue;
+        border: 3px solid $ALU-blue;
+    }
+}
