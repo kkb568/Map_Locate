@@ -23,10 +23,10 @@ class app {
         }
     }
 
-    viewUser(Username, Email) {
+    viewUserByEmail(Email) {
         return new Promise((resolve, reject) => {
-            Locate.find({username: Username, email: Email}, {}, function(error, entry) {
-                if(error) {
+            Locate.find({email: Email}, {}, function(error, entry) {
+                if (error) {
                     reject(error);
                 }
                 else {

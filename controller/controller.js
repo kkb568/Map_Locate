@@ -1,6 +1,5 @@
 const appDAO = require('../model/model');
 const db = new appDAO();
-const alert = require('alert');
 const { decrypt } = require('node-encryption');
 const encryptionKey = process.env.ENCRYPTION_KEY;
 const apiKey = process.env.API_KEY;
@@ -16,15 +15,34 @@ exports.starting_page = async(req,res) => {
 
 exports.locateForm_page = async(req,res) => {
     try {
-        res.render('locateForm', {
-            'email': res.locals.email
-        });
+        var decryptedEmail = decrypt(res.locals.email, encryptionKey).toString();
+        db.viewUserByEmail(decryptedEmail)
+        .then((record) => {
+            // If there is no record, show the locateForm page.
+            if (record.length == 0) {
+                res.render('locateForm', {
+                    'email': res.locals.email
+                });
+            }
+            // If there is a record (user exists), show the mapLocate page directly.
+            else {
+                db.getAllCoordinates()
+                .then((record1) => {
+                    res.render('mapLocate', {
+                        'userLat': parseFloat(record[0].lat),
+                        'userLong': parseFloat(record[0].long),
+                        'coordinates': record1,
+                        'apiKey': apiKey
+                    });
+                })
+            }
+        })
     } catch (error) {
         console.log(error);
     }
 }
 
-// For posting the form data and then rendering the mapLocate page.
+// For posting the form data from the locateForm page and then rendering the mapLocate page.
 exports.mapLocate_page = async(req,res) => {
     // Create an address using the city, state and country values.
     var address = req.body.city + "," + req.body.state + "," + req.body.country;
@@ -37,34 +55,19 @@ exports.mapLocate_page = async(req,res) => {
         .then(data => addressArr = data)
         .then(put => {
             try {
-                // Check if the existing user exists (so as to prevent duplicates in the database).
-                db.viewUser(req.body.username, email)
-                .then((record) => {
-                    console.log("Length: ",record.length);
-                    // Break process if user exists.
-                    if(record.length != 0) {
-                        alert('Cannot repeat adding the same user.');
-                        return;
-                    }
-                    // Add data to the database.
-                    db.addLocateDetails(req.body.username, email, addressArr[0].lat, addressArr[0].lon);
-                    // Check the data's existence so that rendering of the page can happen.
-                    db.viewUser(req.body.username, email)
-                    .then((record1) => {
-                        console.log("Length: ",record1.length);
-                        // Get coordinates for each data.
-                        db.getAllCoordinates()
-                        .then((entry) => {
-                            console.log("Coordinates: ", entry);
-                            // Load the mapLocate page.
-                            res.render('mapLocate', {
-                                'userLat': parseFloat(addressArr[0].lat),
-                                'userLong': parseFloat(addressArr[0].lon),
-                                'coordinates': entry,
-                                'apiKey': apiKey
-                            });
-                        })
-                    })
+                // Add details to the database.
+                db.addLocateDetails(req.body.username, email, addressArr[0].lat, addressArr[0].lon);
+                // Get coordinates for each data.
+                db.getAllCoordinates()
+                .then((entry) => {
+                    console.log("Coordinates: ", entry);
+                    // Load the mapLocate page.
+                    res.render('mapLocate', {
+                        'userLat': parseFloat(addressArr[0].lat),
+                        'userLong': parseFloat(addressArr[0].lon),
+                        'coordinates': entry,
+                        'apiKey': apiKey
+                    });
                 })
             } catch (error) {
                 console.log(error.message);

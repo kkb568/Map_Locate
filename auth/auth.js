@@ -4,15 +4,16 @@ const encryptionKey = process.env.ENCRYPTION_KEY;
 
 exports.createCookie = async (req, res, next) => {
     // Get the Google ID token.
-    let payload = req.body.credential;
+    let idToken = req.body.credential;
     // Decode the ID token.
-    var decodedToken = jwt.decode(payload);
+    var decodedToken = jwt.decode(idToken);
     // Get the email address from the decoded token and encrypt it.
-    res.locals.email = encrypt(decodedToken.email, encryptionKey);
+    let payload = decodedToken.email;
+    res.locals.email = encrypt(payload, encryptionKey);
 
     // Create access token.
     let accessToken = jwt.sign(payload, process.env.ACCESS_TOKEN_SECRET);
-    // Create JWT cookie using the acces token.
+    // Create JWT cookie using the access token.
     res.cookie("jwt", accessToken, {httpOnly:true, secure:true})
     next();
 };
