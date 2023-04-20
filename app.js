@@ -18,6 +18,8 @@ app.set('view engine','mustache');
 const cookieParser = require('cookie-parser');
 app.use(cookieParser());
 
+require('dotenv').config();
+
 const router = require('./routes/routes');
 app.use('/',router);
 

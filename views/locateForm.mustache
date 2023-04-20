@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style/locateForm/locateForm.css">
+    <link rel="stylesheet" href="/style/locateForm/locateForm.css">
     <script src="locateForm.js"></script>
     <title>Locate form</title>
 </head>
@@ -15,7 +15,7 @@
                 <h1>Fill in the form below to sign in</h1>
             </div>
             <div class="bottom-side">
-                <form id="mapLocate" action="/mapLocatePage" method="post">
+                <form id="mapLocate" action="/mapLocatePage/{{email}}" method="post">
                     <label for="username">Username (not your actual name): </label><br>
                     <input type="text" name="username" id="username" required><br><br>
                     <label for="country">Country: </label><br>

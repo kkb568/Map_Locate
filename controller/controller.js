@@ -1,6 +1,9 @@
 const appDAO = require('../model/model');
 const db = new appDAO();
 const alert = require('alert');
+const { decrypt } = require('node-encryption');
+const encryptionKey = process.env.ENCRYPTION_KEY;
+const apiKey = process.env.API_KEY;
 
 // Render the sign up page.
 exports.starting_page = async(req,res) => {
@@ -27,6 +30,7 @@ exports.mapLocate_page = async(req,res) => {
     var address = req.body.city + "," + req.body.state + "," + req.body.country;
     var url = "https://nominatim.openstreetmap.org/search?format=json&limit=3&q=" + address;
 
+    var email = decrypt(req.params.email, encryptionKey).toString();
     // Fetch is used to get the latitude and longitude values, useful for inserting a marker on the map.
     fetch(url)
         .then(response => response.json())
@@ -34,7 +38,7 @@ exports.mapLocate_page = async(req,res) => {
         .then(put => {
             try {
                 // Check if the existing user exists (so as to prevent duplicates in the database).
-                db.viewUser(req.body.username, req.locals.email)
+                db.viewUser(req.body.username, email)
                 .then((record) => {
                     console.log("Length: ",record.length);
                     // Break process if user exists.
@@ -43,9 +47,9 @@ exports.mapLocate_page = async(req,res) => {
                         return;
                     }
                     // Add data to the database.
-                    db.addLocateDetails(req.body.username, req.locals.email, addressArr[0].lat, addressArr[0].lon);
+                    db.addLocateDetails(req.body.username, email, addressArr[0].lat, addressArr[0].lon);
                     // Check the data's existence so that rendering of the page can happen.
-                    db.viewUser(req.body.username, req.locals.email)
+                    db.viewUser(req.body.username, email)
                     .then((record1) => {
                         console.log("Length: ",record1.length);
                         // Get coordinates for each data.
@@ -56,7 +60,8 @@ exports.mapLocate_page = async(req,res) => {
                             res.render('mapLocate', {
                                 'userLat': parseFloat(addressArr[0].lat),
                                 'userLong': parseFloat(addressArr[0].lon),
-                                'coordinates': entry
+                                'coordinates': entry,
+                                'apiKey': apiKey
                             });
                         })
                     })
