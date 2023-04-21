@@ -8,11 +8,12 @@ exports.createCookie = async (req, res, next) => {
     // Decode the ID token.
     var decodedToken = jwt.decode(idToken);
     // Get the email address from the decoded token and encrypt it.
-    let payload = decodedToken.email;
-    res.locals.email = encrypt(payload, encryptionKey);
+    let email = decodedToken.email;
+    res.locals.email = encrypt(email, encryptionKey);
+    // console.log("Picture url: ", decodedToken.picture);
 
     // Create access token.
-    let accessToken = jwt.sign(payload, process.env.ACCESS_TOKEN_SECRET);
+    let accessToken = jwt.sign(idToken, process.env.ACCESS_TOKEN_SECRET);
     // Create JWT cookie using the access token.
     res.cookie("jwt", accessToken, {httpOnly:true, secure:true})
     next();

@@ -60,12 +60,12 @@ exports.mapLocate_page = async(req,res) => {
                 // Get coordinates for each data.
                 db.getAllCoordinates()
                 .then((entry) => {
-                    console.log("Coordinates: ", entry);
                     // Load the mapLocate page.
                     res.render('mapLocate', {
                         'userLat': parseFloat(addressArr[0].lat),
                         'userLong': parseFloat(addressArr[0].lon),
                         'coordinates': entry,
+                        'encryptedEmail': req.params.email,
                         'apiKey': apiKey
                     });
                 })

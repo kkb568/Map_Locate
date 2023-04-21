@@ -5,10 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/style/mapLocate/mapLocate.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>Document</title>
     <script>
-        var modal = document.getElementById("modal");
-
         function initMap() {
             // Get user's coordinates.
             const LatLong = { lat: {{userLat}}, lng: {{userLong}} };
@@ -49,17 +48,30 @@
         }
         window.initMap = initMap;
 
-        function closeModal() {
-            modal.style.opacity = "0";
-            modal.style.zIndex = "-1";
+        function openMenu() {
+            document.getElementById("menu-content").style.width = "20%";
+        }
+
+        function closeMenu() {
+            document.getElementById("menu-content").style.width = "0%";
         }
     </script>
 </head>
 <body>
-   <div id="map"></div>
-   {{#coordinates}}
-        <p hidden class="coordinates">{{lat}},{{long}}</p>
-   {{/coordinates}}
-   <script src="https://maps.googleapis.com/maps/api/js?key={{apiKey}}&callback=initMap"></script>
+    <div class="navbar">
+        <div class="menu-icon">
+            <button onclick="openMenu()"><i class="fa fa-bars"></i></button>
+        </div>
+    </div>
+    <div class="menu-content" id="menu-content">
+        <button onclick="closeMenu()"><i class="fa fa-close"></i></button>
+        <a>Profile</a>
+        <a>Logout</a>
+    </div>
+    <div id="map"></div>
+    {{#coordinates}}
+            <p hidden class="coordinates">{{lat}},{{long}}</p>
+    {{/coordinates}}
+    <script src="https://maps.googleapis.com/maps/api/js?key={{apiKey}}&callback=initMap"></script>
 </body>
 </html>
