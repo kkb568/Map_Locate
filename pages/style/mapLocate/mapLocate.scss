@@ -50,7 +50,7 @@ body {
     button {
         margin-left: 0%;
         font-size: x-large;
-        padding: 16px;
+        padding: 20.7px;
         border: none;
         background-color: transparent;
         cursor: pointer;
@@ -63,6 +63,16 @@ body {
         text-decoration: none;
         display: block;
         font-size: larger;
+        transition: 0.5s ease;
+
+        i {
+            padding-left: 10px;
+        }
+    }
+
+    a:hover {
+        color: $ALU-blue;
+        background-color: white;
     }
 }
 

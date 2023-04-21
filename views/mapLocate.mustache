@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/style/mapLocate/mapLocate.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <title>Document</title>
+    <title>Map_Locate</title>
     <script>
         function initMap() {
             // Get user's coordinates.
@@ -65,12 +65,12 @@
     </div>
     <div class="menu-content" id="menu-content">
         <button onclick="closeMenu()"><i class="fa fa-close"></i></button>
-        <a>Profile</a>
-        <a>Logout</a>
+        <a href='/profile/{{encryptedEmail}}'>Profile<i class="fa fa-user"></i></a>
+        <a href='/logout'>Logout<i class="fa fa-sign-out"></i></a>
     </div>
     <div id="map"></div>
     {{#coordinates}}
-            <p hidden class="coordinates">{{lat}},{{long}}</p>
+        <p hidden class="coordinates">{{lat}},{{long}}</p>
     {{/coordinates}}
     <script src="https://maps.googleapis.com/maps/api/js?key={{apiKey}}&callback=initMap"></script>
 </body>

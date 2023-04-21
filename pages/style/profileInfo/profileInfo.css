@@ -1,0 +1,125 @@
+@font-face {
+  font-family: Montserrat;
+  src: url(Montserrat-Medium.ttf);
+}
+body {
+  font-family: Montserrat;
+}
+
+.container1 {
+  position: absolute;
+  top: 0%;
+  left: 0%;
+  width: 100%;
+  height: 100%;
+  background-color: rgb(213, 234, 255);
+  display: table;
+}
+
+.outer-container1 {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.inner-container1 {
+  width: 600px;
+  height: auto;
+  margin: auto;
+  background-color: white;
+  padding: 15px;
+  border-radius: 10px;
+}
+.inner-container1 form {
+  padding: 5% 5% 2% 5%;
+}
+.inner-container1 input, .inner-container1 select {
+  font-size: medium;
+  padding: 5px;
+  width: 90%;
+}
+.inner-container1 input {
+  outline: none;
+}
+.inner-container1 select {
+  font-family: Montserrat;
+  cursor: pointer;
+}
+.inner-container1 input[type=checkbox] {
+  width: 15px;
+  height: 15px;
+}
+.inner-container1 button {
+  font-family: Montserrat;
+  font-size: large;
+  cursor: pointer;
+  background-color: rgb(0, 46, 109);
+  border: none;
+  padding: 10px;
+  color: white;
+  border-radius: 10px;
+  margin-left: 35%;
+  transition: all 0.3s ease;
+}
+.inner-container1 button:hover {
+  background-color: transparent;
+  color: rgb(0, 46, 109);
+  border: 3px solid rgb(0, 46, 109);
+}
+.inner-container1 a {
+  margin-left: 37%;
+  cursor: pointer;
+}
+.inner-container1 a:hover {
+  color: rgb(0, 46, 109);
+  text-decoration: underline;
+}
+
+.modal {
+  position: absolute;
+  top: 0%;
+  left: 0%;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+  display: table;
+  opacity: 0;
+  z-index: -1;
+  transition: 0.5s ease;
+}
+
+.outerModal {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.innerModal {
+  width: 600px;
+  height: auto;
+  margin: auto;
+  padding: 15px;
+  border-radius: 10px;
+  background-color: white;
+}
+.innerModal button {
+  font-family: Montserrat;
+  font-size: large;
+  cursor: pointer;
+  background-color: rgb(0, 46, 109);
+  border: none;
+  padding: 10px;
+  color: white;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+}
+.innerModal button a {
+  text-decoration: none;
+  color: white;
+}
+.innerModal button a:hover {
+  color: rgb(0, 46, 109);
+}
+.innerModal button:hover {
+  background-color: transparent;
+  color: rgb(0, 46, 109);
+  border: 3px solid rgb(0, 46, 109);
+}/*# sourceMappingURL=profileInfo.css.map */

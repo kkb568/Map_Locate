@@ -44,7 +44,7 @@ body {
 .menu-content button {
   margin-left: 0%;
   font-size: x-large;
-  padding: 16px;
+  padding: 20.7px;
   border: none;
   background-color: transparent;
   cursor: pointer;
@@ -56,6 +56,14 @@ body {
   text-decoration: none;
   display: block;
   font-size: larger;
+  transition: 0.5s ease;
+}
+.menu-content a i {
+  padding-left: 10px;
+}
+.menu-content a:hover {
+  color: rgb(0, 46, 109);
+  background-color: white;
 }
 
 #map {

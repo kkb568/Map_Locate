@@ -11,4 +11,18 @@ router.post("/signIn", auth.createCookie,
 router.post("/mapLocatePage/:email", auth.verify,
     controller.mapLocate_page);
 
+router.get("/profile/:email", auth.verify,
+    controller.profilePage);
+
+router.post("/updatedProfile/:email", auth.verify,
+    controller.updateUser,
+    controller.backToMapLocate_page);
+
+router.get("/deleteAccount/:email", controller.deleteAccount,
+    auth.clearCookie,
+    controller.starting_page);
+    
+router.get("/logout", auth.clearCookie,
+    controller.starting_page);
+
 module.exports = router;

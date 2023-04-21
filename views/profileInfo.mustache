@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/style/profileInfo/profileInfo.css">
+    <title>Profile</title>
+    <script>
+        function openModal() {
+            var modal = document.getElementById("modal");
+            modal.style.opacity = '1';
+            modal.style.zIndex = '2';
+        }
+
+        function closeModal() {
+            var modal = document.getElementById("modal");
+            modal.style.opacity = '0';
+            modal.style.zIndex = '-1';
+        }
+    </script>
+</head>
+<body>
+    <div class="container1">
+        <div class="outer-container1">
+            <div class="inner-container1">
+                <h1>Profile info</h1><hr>
+                <form id="profile" action="/updatedProfile/{{email}}" method="post">
+                    <label for="username">Username: </label><br>
+                    <input type="text" name="username" id="username" value={{username}}><br><br>
+                    <label for="country">Country: </label><br>
+                    <input type="text" name="country" id="country" value={{country}}><br><br>
+                    <label for="state">State/province: </label><br>
+                    <input type="text" name="state" id="state" value={{state}}><br><br>
+                    <label for="city">City/town/district: </label><br>
+                    <input type="text" name="city" id="city" value={{city}}><br><br>
+                    <button id="save">Save Profile</button>
+                </form>
+                <a onclick="openModal()">Delete account</a>
+            </div>
+        </div>
+    </div>
+    <div class="modal" id="modal">
+        <div class="outerModal">
+            <div class="innerModal">
+                <p><strong>Are you sure you want to delete your account?</strong></p>
+                <p>Remember, you can't undo this action.<p>
+                <button><a href="/deleteAccount/{{email}}">Yes</a></button>
+                <button onclick="closeModal()">No</button>
+            </div>        
+        </div>
+    </div>
+</body>
+</html>

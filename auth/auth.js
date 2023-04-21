@@ -10,7 +10,6 @@ exports.createCookie = async (req, res, next) => {
     // Get the email address from the decoded token and encrypt it.
     let email = decodedToken.email;
     res.locals.email = encrypt(email, encryptionKey);
-    // console.log("Picture url: ", decodedToken.picture);
 
     // Create access token.
     let accessToken = jwt.sign(idToken, process.env.ACCESS_TOKEN_SECRET);
@@ -29,6 +28,13 @@ exports.verify = async (req, res, next) => {
         payload = jwt.verify(accessToken, process.env.ACCESS_TOKEN_SECRET);
         next();
     } catch (e) {
-        res.status(401).send();
+        res.redirect('/signup.html');
     }
 };
+
+exports.clearCookie = function(req, res, next) {
+    res
+        .clearCookie("jwt")
+        .clearCookie("g_state");
+    next();
+}
