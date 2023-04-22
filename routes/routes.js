@@ -25,4 +25,7 @@ router.get("/deleteAccount/:email", controller.deleteAccount,
 router.get("/logout", auth.clearCookie,
     controller.starting_page);
 
+//404 error functionality.
+router.use(controller.fileError);
+
 module.exports = router;

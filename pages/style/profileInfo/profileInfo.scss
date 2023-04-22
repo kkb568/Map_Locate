@@ -139,3 +139,19 @@ body {
         border: 3px solid $ALU-blue;
     }
 }
+
+@media screen and (max-width: 600px) {
+    .inner-container1, .innerModal  {
+        width: 300px;
+    }
+
+    .inner-container1 {
+        button {
+            margin-left: 25%;
+        }
+
+        a {
+            margin-left: 28%;
+        }
+    }
+}

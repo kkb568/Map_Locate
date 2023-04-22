@@ -167,3 +167,8 @@ exports.deleteAccount = async(req, res, next) => {
         console.log(error.message);
     }
 }
+
+exports.fileError = function(req, res) {
+    res.status(404);
+    res.render('404Error');
+}

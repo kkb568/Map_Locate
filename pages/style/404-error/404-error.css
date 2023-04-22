@@ -6,39 +6,44 @@ body {
   font-family: Montserrat;
 }
 
-.container {
+.notFound-content {
   position: absolute;
-  top: 0;
-  left: 0;
+  top: 0%;
+  left: 0%;
   width: 100%;
-  min-height: 100%;
+  height: 100%;
   background-color: rgb(213, 234, 255);
   display: table;
 }
 
-.outer-container {
+.outerContent {
   display: table-cell;
   vertical-align: middle;
 }
 
-.inner-container {
-  margin: auto;
+.innerContent {
   width: 600px;
   height: auto;
+  margin: auto;
   background-color: white;
   padding: 10px;
   border-radius: 10px;
+  text-align: center;
 }
-
-.signUp-details {
-  margin-left: 30%;
+.innerContent p:first-child {
+  font-size: 80px;
+  margin-top: -0.1%;
+}
+.innerContent p:nth-child(2) {
+  font-size: xx-large;
+  margin-top: -10%;
+}
+.innerContent p:nth-child(3) {
+  font-size: large;
 }
 
 @media screen and (max-width: 600px) {
-  .inner-container {
+  .innerContent {
     width: 300px;
   }
-  .signUp-details {
-    margin-left: 10%;
-  }
-}/*# sourceMappingURL=signUp.css.map */
+}/*# sourceMappingURL=404-error.css.map */

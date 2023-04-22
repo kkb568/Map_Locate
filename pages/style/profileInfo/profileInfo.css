@@ -122,4 +122,16 @@ body {
   background-color: transparent;
   color: rgb(0, 46, 109);
   border: 3px solid rgb(0, 46, 109);
+}
+
+@media screen and (max-width: 600px) {
+  .inner-container1, .innerModal {
+    width: 300px;
+  }
+  .inner-container1 button {
+    margin-left: 25%;
+  }
+  .inner-container1 a {
+    margin-left: 28%;
+  }
 }/*# sourceMappingURL=profileInfo.css.map */

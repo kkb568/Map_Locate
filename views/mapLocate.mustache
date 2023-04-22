@@ -31,12 +31,12 @@
                         map,
                         icon: image1
                     });
+                    // TO-DO (Correct the info window).
                     otherUsersMarkers.addListener("click", () => {
                         const infoWindow = new google.maps.InfoWindow();
                         infoWindow.close();
                         infoWindow.setContent('<div class="connect"><p>Would you like to connect to the user?</p><button>Yes</button></div>');
                         infoWindow.open(otherUsersMarkers.getMap(), otherUsersMarkers);
-
                     });
                 }
             }
@@ -49,7 +49,13 @@
         window.initMap = initMap;
 
         function openMenu() {
-            document.getElementById("menu-content").style.width = "20%";
+            var menu = document.getElementById("menu-content");
+            if (window.innerWidth > 600) {
+                menu.style.width = "20%";
+            }
+            else {
+                menu.style.width = "40%";
+            }
         }
 
         function closeMenu() {
