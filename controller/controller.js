@@ -7,7 +7,7 @@ const apiKey = process.env.API_KEY;
 // Render the sign up page.
 exports.starting_page = async(req,res) => {
     try {
-        res.redirect('/signup.html');
+        res.redirect('/signup');
     } catch (error) {
         console.log(error.message);
     }

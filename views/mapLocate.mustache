@@ -26,18 +26,20 @@
                 for (var i=0; i<coordinates.length; i++) {
                     var latslongs = coordinates[i].innerText.split(",");
                     var otherCoordinates = {lat: parseFloat(latslongs[0]), lng: parseFloat(latslongs[1])};
-                    var otherUsersMarkers = new google.maps.Marker({
-                        position: otherCoordinates,
-                        map,
-                        icon: image1
-                    });
-                    // TO-DO (Correct the info window).
-                    otherUsersMarkers.addListener("click", () => {
-                        const infoWindow = new google.maps.InfoWindow();
-                        infoWindow.close();
-                        infoWindow.setContent('<div class="connect"><p>Would you like to connect to the user?</p><button>Yes</button></div>');
-                        infoWindow.open(otherUsersMarkers.getMap(), otherUsersMarkers);
-                    });
+                    if (otherCoordinates.lat != {{userLat}} && otherCoordinates.lng != {{userLong}}) {
+                        var otherUsersMarker = new google.maps.Marker({
+                            position: otherCoordinates,
+                            map,
+                            icon: image1
+                        });
+                        // TO-DO (Correct the info window).
+                        var infoWindow = new google.maps.InfoWindow();
+                        google.maps.event.addListener(otherUsersMarker, "click", () => {
+                            infoWindow.close();
+                            infoWindow.setContent('<div class="connect"><p>Would you like to connect to the user?</p><button>Yes</button></div>');
+                            infoWindow.open(otherUsersMarker.getMap(), otherUsersMarker);
+                        });
+                    }
                 }
             }
             const userMarker = new google.maps.Marker({
