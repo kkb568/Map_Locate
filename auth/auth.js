@@ -28,7 +28,7 @@ exports.verify = async (req, res, next) => {
         payload = jwt.verify(accessToken, process.env.ACCESS_TOKEN_SECRET);
         next();
     } catch (e) {
-        res.redirect('/signup.html');
+        clearAfterCookieReject(res);
     }
 };
 
@@ -37,4 +37,11 @@ exports.clearCookie = function(req, res, next) {
         .clearCookie("jwt")
         .clearCookie("g_state");
     next();
+}
+
+function clearAfterCookieReject(res) {
+    res
+        .clearCookie("jwt")
+        .clearCookie("g_state")
+        .redirect('/signup');
 }
