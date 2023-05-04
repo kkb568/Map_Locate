@@ -150,7 +150,7 @@ exports.backToMapLocate_page = async(req,res) => {
                         'encryptedEmail': req.params.email,
                         'apiKey': apiKey
                     });
-                })
+                });
             } catch (error) {
                 console.log(error.message);
             }
@@ -158,6 +158,22 @@ exports.backToMapLocate_page = async(req,res) => {
         .catch(err => console.log(err));
 }
 
+exports.sendEmailPage = async(req, res) => {
+    try {
+        var userEmail = decrypt(req.params.email, encryptionKey).toString();
+        db.getEmailByCoordinates(req.params.lat, req.params.long)
+        .then((entry) => {
+            res.render('sendEmail', {
+                'sender': userEmail,
+                'recepient': entry[0].email
+            });
+        });
+    } catch (error) {
+        console.log(error.message);
+    }
+}
+
+// Delete user's account.
 exports.deleteAccount = async(req, res, next) => {
     try {
         var email = decrypt(req.params.email, encryptionKey).toString();
@@ -168,6 +184,7 @@ exports.deleteAccount = async(req, res, next) => {
     }
 }
 
+// Render 404-error page.
 exports.fileError = function(req, res) {
     res.status(404);
     res.render('404Error');

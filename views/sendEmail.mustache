@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/style/sendEmail/sendEmail.css">
+    <script src="/sendEmail.js"></script>
+    <title>Send email</title>
+</head>
+<body>
+    <div class="container">
+        <div class="inner-container">
+            <div class="confirmedSentEmail" id="confirmedSentEmail">
+                <p>Email sent successfully</p>
+            </div>
+            <div class="top-side">
+                <h1>Fill in the form below to send email</h1>
+            </div>
+            <div class="bottom-side">
+                <form onsubmit="sendEmail(event)">
+                    <input type="hidden" id="from" value={{sender}} required>
+                    <input type="hidden" id="to" value={{recepient}} required>
+                    <label for="subject">Subject: </label><br>
+                    <input type="text" id="subject" required><br><br>
+                    <label for="message">Message: </label><br>
+                    <textarea id="message" required></textarea><br><br>
+                    <button type="submit">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="https://smtpjs.com/v3/smtp.js"></script>
+</body>
+</html>

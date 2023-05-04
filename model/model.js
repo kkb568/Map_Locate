@@ -56,6 +56,19 @@ class app {
         });
     }
 
+    getEmailByCoordinates(Lat, Long) {
+        return new Promise((resolve, reject) => {
+            Locate.find({lat:Lat, long:Long},{_id:0, email:1}, function(error,entry) {
+                if(error) {
+                    reject(error);
+                }
+                else {
+                    resolve(entry);
+                }
+            });
+        });
+    }
+
     updateDetails(Email, Username, Lat, Long, Country, State, City) {
         return new Promise((resolve, reject) => {
             Locate.findOneAndUpdate({email:Email}, 

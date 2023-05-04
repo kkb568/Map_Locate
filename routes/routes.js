@@ -14,6 +14,9 @@ router.post("/mapLocatePage/:email", auth.verify,
 router.get("/profile/:email", auth.verify,
     controller.profilePage);
 
+router.get("/sendEmail/:email/:lat/:long", auth.verify,
+    controller.sendEmailPage);
+
 router.post("/updatedProfile/:email", auth.verify,
     controller.updateUser,
     controller.backToMapLocate_page);
