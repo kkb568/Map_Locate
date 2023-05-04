@@ -21,13 +21,15 @@ exports.createCookie = async (req, res, next) => {
 exports.verify = async (req, res, next) => {
     var accessToken = req.cookies.jwt;
     if(!accessToken) {
-        return res.status(403).send();
+        // In case the access token does not exist.
+        return res.redirect('/signup');
     }
     let payload;
     try {
         payload = jwt.verify(accessToken, process.env.ACCESS_TOKEN_SECRET);
         next();
     } catch (e) {
+        // In case there's request unauthorized error.
         clearAfterCookieReject(res);
     }
 };

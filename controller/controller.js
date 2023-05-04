@@ -158,6 +158,7 @@ exports.backToMapLocate_page = async(req,res) => {
         .catch(err => console.log(err));
 }
 
+// Render the sendEmail page.
 exports.sendEmailPage = async(req, res) => {
     try {
         var userEmail = decrypt(req.params.email, encryptionKey).toString();
