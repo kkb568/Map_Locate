@@ -1,6 +1,8 @@
 const appDAO = require('../model/model');
 const db = new appDAO();
-const { decrypt } = require('node-encryption');
+const { decrypt, encrypt } = require('node-encryption');
+const nodemailer = require('nodemailer');
+const alert = require('alert');
 const encryptionKey = process.env.ENCRYPTION_KEY;
 const apiKey = process.env.API_KEY;
 
@@ -161,13 +163,44 @@ exports.backToMapLocate_page = async(req,res) => {
 // Render the sendEmail page.
 exports.sendEmailPage = async(req, res) => {
     try {
-        var userEmail = decrypt(req.params.email, encryptionKey).toString();
         db.getEmailByCoordinates(req.params.lat, req.params.long)
         .then((entry) => {
+            var recepientEmail = encrypt(entry[0].email, encryptionKey).toString();
             res.render('sendEmail', {
-                'sender': userEmail,
-                'recepient': entry[0].email
+                'sender': req.params.email,
+                'recepient': recepientEmail
             });
+        });
+    } catch (error) {
+        console.log(error.message);
+    }
+}
+
+exports.sendEmail = async(req, res) => {
+    var sender = decrypt(req.body.from, encryptionKey).toString();
+    var recepient = decrypt(req.body.to, encryptionKey).toString();
+    try {
+        const transporter = nodemailer.createTransport({
+            service: 'gmail',
+            auth: {
+                user: process.env.AUTH_USER,
+                pass: process.env.AUTH_PASS
+            }
+            });
+            
+        const mailOptions = {
+            from: sender,
+            to: recepient,
+            subject: req.body.subject,
+            text: req.body.message
+        };
+            
+        transporter.sendMail(mailOptions, function(error, info){
+            if (error) {
+                alert('Email not sent.');
+            } else {
+                alert('Email sent successfully.');
+            }   
         });
     } catch (error) {
         console.log(error.message);
