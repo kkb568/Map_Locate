@@ -52,8 +52,8 @@ body {
   cursor: pointer;
 }
 .bottom-side input[type=checkbox] {
-  width: 15px;
-  height: 15px;
+  width: 17px;
+  height: 17px;
 }
 .bottom-side button {
   position: relative;

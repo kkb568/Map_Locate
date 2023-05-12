@@ -129,7 +129,7 @@ exports.updateUser = async(req, res, next) => {
     }
 }
 
-// Takes the user back to the Map_Locate page from the profile page.
+// Takes the user back to the Map_Locate page from the profile page after submitting the form in the profile page.
 exports.backToMapLocate_page = async(req,res) => {
     // Create an address using the city, state and country values.
     var address = req.body.city + "," + req.body.state + "," + req.body.country;
