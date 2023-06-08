@@ -42,14 +42,15 @@
             if (coordinates.length != 0) {
                 for (var i=0; i<coordinates.length; i++) {
                     var latslongs = coordinates[i].innerText.split(",");
-                    var otherCoordinates = {lat: parseFloat(latslongs[0]), lng: parseFloat(latslongs[1])};
+                    var user = latslongs[0];
+                    var otherCoordinates = {lat: parseFloat(latslongs[1]), lng: parseFloat(latslongs[2])};
                     if (otherCoordinates.lat != {{userLat}} && otherCoordinates.lng != {{userLong}}) {
                         var otherUserMarker = new google.maps.Marker({
                             position: otherCoordinates,
                             map,
                             icon: image1
                         });
-                        markerWindow(otherUserMarker);
+                        markerWindow(user, otherUserMarker);
                     }
                 }
             }
@@ -60,13 +61,13 @@
             });
         }
 
-        function markerWindow(marker) {
+        function markerWindow(user, marker) {
             const infoWindow = new google.maps.InfoWindow();
             google.maps.event.addListener(marker, "click", () => {
                 var markerLat = marker.getPosition().lat();
                 var markerLong = marker.getPosition().lng();
                 infoWindow.close();
-                infoWindow.setContent(`<div class="connect"><p>Would you like to connect to the user?</p><button><a href="/sendEmail/{{encryptedEmail}}/${markerLat}/${markerLong}">Yes</a></button></div>`);
+                infoWindow.setContent(`<div class="connect"><p>Would you like to connect to ${user}?</p><button><a href="/sendEmail/{{encryptedEmail}}/${markerLat}/${markerLong}">Yes</a></button></div>`);
                 infoWindow.open(marker.getMap(), marker);
             });
         }
@@ -86,7 +87,7 @@
     </div>
     <div id="map"></div>
     {{#coordinates}}
-        <p hidden class="coordinates">{{lat}},{{long}}</p>
+        <p hidden class="coordinates">{{username}},{{lat}},{{long}}</p>
     {{/coordinates}}
     <script src="https://maps.googleapis.com/maps/api/js?key={{apiKey}}&callback=initMap"></script>
 </body>

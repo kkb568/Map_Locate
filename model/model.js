@@ -45,7 +45,7 @@ class app {
 
     getAllCoordinates() {
         return new Promise((resolve, reject) => {
-            Locate.find({},{_id:0, lat:1, long:1}, function(error,entry) {
+            Locate.find({},{_id:0, lat:1, long:1, username:1}, function(error,entry) {
                 if(error) {
                     reject(error);
                 }
