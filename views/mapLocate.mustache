@@ -30,8 +30,12 @@
             const LatLong = { lat: {{userLat}}, lng: {{userLong}} };
             // Image used to create the user's marker.
             const image = "http://maps.google.com/mapfiles/ms/icons/blue-dot.png";
-            // Image used to create the other user's marker(s).
+            // Image used to create the other user's marker(s) who are students.
             const image1 = "http://maps.google.com/mapfiles/ms/icons/green-dot.png";
+            // Image used to create the other user's marker(s) who are staff.
+            const image2 = "http://maps.google.com/mapfiles/ms/icons/red-dot.png";
+            // Image used to create the other user's marker(s) who are alumni.
+            const image3 = "http://maps.google.com/mapfiles/ms/icons/purple-dot.png";
             // Create map.
             const map = new google.maps.Map(document.getElementById("map"), {
                 zoom: 7,
@@ -43,14 +47,33 @@
                 for (var i=0; i<coordinates.length; i++) {
                     var latslongs = coordinates[i].innerText.split(",");
                     var user = latslongs[0];
-                    var otherCoordinates = {lat: parseFloat(latslongs[1]), lng: parseFloat(latslongs[2])};
+                    var role = latslongs[1];
+                    var otherCoordinates = {lat: parseFloat(latslongs[2]), lng: parseFloat(latslongs[3])};
                     if (otherCoordinates.lat != {{userLat}} && otherCoordinates.lng != {{userLong}}) {
-                        var otherUserMarker = new google.maps.Marker({
-                            position: otherCoordinates,
-                            map,
-                            icon: image1
-                        });
-                        markerWindow(user, otherUserMarker);
+                        if (role == "student") {
+                            var otherUserMarker = new google.maps.Marker({
+                                position: otherCoordinates,
+                                map,
+                                icon: image1
+                            });
+                            markerWindow(user, otherUserMarker);
+                        }
+                        else if (role == "staff") {
+                            var otherUserMarker = new google.maps.Marker({
+                                position: otherCoordinates,
+                                map,
+                                icon: image2
+                            });
+                            markerWindow(user, otherUserMarker);
+                        }
+                        else if (role == "alumni") {
+                            var otherUserMarker = new google.maps.Marker({
+                                position: otherCoordinates,
+                                map,
+                                icon: image3
+                            });
+                            markerWindow(user, otherUserMarker);
+                        }
                     }
                 }
             }
@@ -85,9 +108,24 @@
         <a href='/profile/{{encryptedEmail}}'>Profile<i class="fa fa-user"></i></a>
         <a href='/logout'>Logout<i class="fa fa-sign-out"></i></a>
     </div>
+    <div class="keys">
+        <h3>Keys</h3>
+        <p>
+           <img src="http://maps.google.com/mapfiles/ms/icons/blue-dot.png" alt="Blue colored map pin indicating the user"> - User 
+        </p>
+        <p>
+           <img src="http://maps.google.com/mapfiles/ms/icons/green-dot.png" alt="Green colored map pin indicating an ALU student"> - ALU student
+        </p>
+        <p>
+           <img src="http://maps.google.com/mapfiles/ms/icons/red-dot.png" alt="Red colored map pin indicating the staff"> - ALU staff 
+        </p>
+        <p>
+           <img src="http://maps.google.com/mapfiles/ms/icons/purple-dot.png" alt="Purple Blue colored map pin indicating the alumni"> - ALU alumni 
+        </p>
+    </div>
     <div id="map"></div>
     {{#coordinates}}
-        <p hidden class="coordinates">{{username}},{{lat}},{{long}}</p>
+        <p hidden class="coordinates">{{username}},{{role}},{{lat}},{{long}}</p>
     {{/coordinates}}
     <script src="https://maps.googleapis.com/maps/api/js?key={{apiKey}}&callback=initMap"></script>
 </body>

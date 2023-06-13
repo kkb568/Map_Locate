@@ -65,6 +65,24 @@ body {
   background-color: white;
 }
 
+.keys {
+  position: fixed;
+  left: 1%;
+  top: 20%;
+  width: auto;
+  height: 250px;
+  padding: 10px;
+  z-index: 2;
+  background-color: white;
+  border-radius: 10px;
+}
+.keys h3 {
+  text-align: center;
+}
+.keys img {
+  vertical-align: middle;
+}
+
 #map {
   position: absolute;
   left: 0%;

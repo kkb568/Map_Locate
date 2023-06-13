@@ -6,6 +6,7 @@ const locateSchema = new schema({
     email: {type: String, unique: true},
     lat: {type: String, unique: false},
     long: {type: String, unique: false},
+    role: {type: String, unique: false},
     country: {type: String, unique: false},
     state: {type: String, unique: false},
     city: {type: String, unique: false}
@@ -13,13 +14,14 @@ const locateSchema = new schema({
 const Locate = mongoose.model("Locate", locateSchema);
 
 class app {
-    addLocateDetails(Username, Email, Lat, Long, Country, State, City) {
+    addLocateDetails(Username, Email, Lat, Long, Role, Country, State, City) {
         try {
             let newLocate = new Locate({
                 username: Username,
                 email: Email,
                 lat: Lat,
                 long: Long,
+                role: Role,
                 country: Country,
                 state: State,
                 city: City
@@ -45,7 +47,7 @@ class app {
 
     getAllCoordinates() {
         return new Promise((resolve, reject) => {
-            Locate.find({},{_id:0, lat:1, long:1, username:1}, function(error,entry) {
+            Locate.find({},{_id:0, lat:1, long:1, username:1, role:1}, function(error,entry) {
                 if(error) {
                     reject(error);
                 }

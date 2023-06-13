@@ -37,7 +37,7 @@
         .top-side h1 {
             padding: 8%;
             color: white;
-            margin-top: 10%;
+            margin-top: 5%;
         }
 
         .bottom-side {
@@ -114,6 +114,12 @@
                 <form id="mapLocate" action="/mapLocatePage/{{email}}" method="post">
                     <label for="username">Username (not your actual name): </label><br>
                     <input type="text" name="username" id="username" placeholder="osd25" required><br><br>
+                    <label for="role">Role: </label><br>
+                    <select id="role" name="role">
+                        <option value="student" selected>Student</option>
+                        <option value="staff">Staff</option>
+                        <option value="alumni">Alumni</option>
+                    </select><br><br>
                     <label for="country">Country: </label><br>
                     <select id="country" name="country" onchange="getSelectedCountry()" required></select><br><br>
                     <label for="state">State/province: </label><br>

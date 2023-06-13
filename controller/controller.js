@@ -63,6 +63,7 @@ exports.mapLocate_page = async(req,res) => {
                     email, 
                     addressArr[0].lat,
                     addressArr[0].lon,
+                    req.body.role,
                     req.body.country,
                     req.body.state,
                     req.body.city);

@@ -75,6 +75,26 @@ body {
     }
 }
 
+.keys {
+    position: fixed;
+    left: 1%;
+    top: 20%;
+    width: auto;
+    height: 250px;
+    padding: 10px;
+    z-index: 2;
+    background-color: $White;
+    border-radius: 10px;
+
+    h3 {
+        text-align: center;
+    }
+
+    img {
+        vertical-align: middle;
+    }
+}
+
 #map {
     position: absolute;
     left: 0%;
