@@ -48,7 +48,9 @@
                     var latslongs = coordinates[i].innerText.split(",");
                     var user = latslongs[0];
                     var role = latslongs[1];
-                    var otherCoordinates = {lat: parseFloat(latslongs[2]), lng: parseFloat(latslongs[3])};
+                    var expertise = latslongs[2];
+                    var interests = latslongs[3];
+                    var otherCoordinates = {lat: parseFloat(latslongs[4]), lng: parseFloat(latslongs[5])};
                     if (otherCoordinates.lat != {{userLat}} && otherCoordinates.lng != {{userLong}}) {
                         if (role == "student") {
                             var otherUserMarker = new google.maps.Marker({
@@ -56,7 +58,7 @@
                                 map,
                                 icon: image1
                             });
-                            markerWindow(user, otherUserMarker);
+                            markerWindow(user, otherUserMarker, expertise, interests);
                         }
                         else if (role == "staff") {
                             var otherUserMarker = new google.maps.Marker({
@@ -64,7 +66,7 @@
                                 map,
                                 icon: image2
                             });
-                            markerWindow(user, otherUserMarker);
+                            markerWindow(user, otherUserMarker, expertise, interests);
                         }
                         else if (role == "alumni") {
                             var otherUserMarker = new google.maps.Marker({
@@ -72,7 +74,7 @@
                                 map,
                                 icon: image3
                             });
-                            markerWindow(user, otherUserMarker);
+                            markerWindow(user, otherUserMarker, expertise, interests);
                         }
                     }
                 }
@@ -84,13 +86,15 @@
             });
         }
 
-        function markerWindow(user, marker) {
+        function markerWindow(user, marker,  expertise, interests) {
             const infoWindow = new google.maps.InfoWindow();
             google.maps.event.addListener(marker, "click", () => {
                 var markerLat = marker.getPosition().lat();
                 var markerLong = marker.getPosition().lng();
                 infoWindow.close();
-                infoWindow.setContent(`<div class="connect"><p>Would you like to connect to ${user}?</p><button><a href="/sendEmail/{{encryptedEmail}}/${markerLat}/${markerLong}">Yes</a></button></div>`);
+                infoWindow.setContent(`<div class="connect"><p>Would you like to connect to ${user}?</p>
+                    <p>Expertise: ${expertise}</p><p>Interest(s): ${interests}</p>
+                    <button><a href="/sendEmail/{{encryptedEmail}}/${markerLat}/${markerLong}">Yes</a></button></div>`);
                 infoWindow.open(marker.getMap(), marker);
             });
         }
@@ -125,7 +129,7 @@
     </div>
     <div id="map"></div>
     {{#coordinates}}
-        <p hidden class="coordinates">{{username}},{{role}},{{lat}},{{long}}</p>
+        <p hidden class="coordinates">{{username}},{{role}},{{expertise}},{{interests}},{{lat}},{{long}}</p>
     {{/coordinates}}
     <script src="https://maps.googleapis.com/maps/api/js?key={{apiKey}}&callback=initMap"></script>
 </body>

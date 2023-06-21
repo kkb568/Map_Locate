@@ -64,6 +64,10 @@
             width: 17px;
             height: 17px;
         }
+        .bottom-side p {
+            font-size: small;
+            color: green;
+        }
         .bottom-side button {
             position: relative;
             bottom: 1%;
@@ -126,11 +130,17 @@
                     <select id="state" name="state" required></select><br><br>
                     <label for="city">City/town/district: </label><br>
                     <input type="text" name="city" id="city" placeholder="Claremont, Cape Town" required><br><br>
+                    <label for="expertise">What your main expertise/course you are undertaking? (maximum 30 characters)</label><br>
+                    <input type="text" name="expertise" onkeyup="countChars(this, 'charNum_expertise')" maxlength="30" required>
+                    <p id="charNum_expertise"><i>Total: 0 characters</i></p>
+                    <label for="interests">What are your interest(s)? (maximum 50 characters)</label><br>
+                    <input type="text" name="interests" onkeyup="countChars(this, 'charNum_interest')" placeholder="photography and travel" maxlength="50" required>
+                    <p id="charNum_interest"><i>Total: 0 characters</i></p>
                     <input type="checkbox" id="confirm" name="confirm" value="confirm" required>
                     <label for="confirm">I agree to the privacy policy.</label><br><br>
                     <button id="submit">Submit</button>
                 </form>
-            </div>
+            </div><br>
         </div>
     </div>
 </body>

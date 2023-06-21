@@ -24,10 +24,10 @@ body {
 .inner-container1 {
   width: 600px;
   height: auto;
-  margin: auto;
   background-color: white;
   padding: 15px;
   border-radius: 10px;
+  margin: 15px auto 15px auto;
 }
 .inner-container1 form {
   padding: 5% 5% 2% 5%;
@@ -73,9 +73,13 @@ body {
   color: rgb(0, 46, 109);
   text-decoration: underline;
 }
+.inner-container1 p {
+  font-size: small;
+  color: green;
+}
 
 .modal {
-  position: absolute;
+  position: fixed;
   top: 0%;
   left: 0%;
   width: 100%;

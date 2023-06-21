@@ -28,7 +28,7 @@ exports.locateForm_page = async(req,res) => {
             }
             // If there is a record (user exists), show the mapLocate page directly.
             else {
-                db.getAllCoordinates()
+                db.getAllUsers()
                 .then((record1) => {
                     res.render('mapLocate', {
                         'userLat': parseFloat(record[0].lat),
@@ -66,9 +66,11 @@ exports.mapLocate_page = async(req,res) => {
                     req.body.role,
                     req.body.country,
                     req.body.state,
-                    req.body.city);
-                // Get coordinates for each data.
-                db.getAllCoordinates()
+                    req.body.city,
+                    req.body.expertise,
+                    req.body.interests);
+                // Get all users.
+                db.getAllUsers()
                 .then((entry) => {
                     // Load the mapLocate page.
                     res.render('mapLocate', {
@@ -97,7 +99,9 @@ exports.profilePage = async(req, res) => {
                 'username': record[0].username,
                 'country': record[0].country,
                 'state': record[0].state,
-                'city': record[0].city
+                'city': record[0].city,
+                'expertise': record[0].expertise,
+                'interests': record[0].interests
             });
         })
     } catch (error) {
@@ -122,7 +126,9 @@ exports.updateUser = async(req, res, next) => {
                     addressArr[0].lon,
                     req.body.country,
                     req.body.state,
-                    req.body.city);
+                    req.body.city,
+                    req.body.expertise,
+                    req.body.interests);
                 next();
             })
     } catch (error) {
@@ -143,7 +149,7 @@ exports.backToMapLocate_page = async(req,res) => {
         .then(put => {
             try {
                 // Get coordinates for each data.
-                db.getAllCoordinates()
+                db.getAllUsers()
                 .then((entry) => {
                     // Load the mapLocate page.
                     res.render('mapLocate', {

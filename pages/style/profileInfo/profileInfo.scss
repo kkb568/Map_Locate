@@ -27,10 +27,10 @@ body {
 .inner-container1 {
     width: 600px;
     height: auto;
-    margin: auto;
     background-color: white;
     padding: 15px;
     border-radius: 10px;
+    margin: 15px auto 15px auto;
 
     form {
         padding: 5% 5% 2% 5%;
@@ -84,10 +84,15 @@ body {
         color: $ALU-blue;
         text-decoration: underline;
     }
+
+    p {
+        font-size: small;
+        color: green;
+    }
 }
 
 .modal {
-    position: absolute;
+    position: fixed;
     top: 0%;
     left: 0%;
     width: 100%;

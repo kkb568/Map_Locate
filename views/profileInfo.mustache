@@ -6,19 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/style/profileInfo/profileInfo.css">
     <title>Profile</title>
-    <script>
-        function openModal() {
-            var modal = document.getElementById("modal");
-            modal.style.opacity = '1';
-            modal.style.zIndex = '2';
-        }
-
-        function closeModal() {
-            var modal = document.getElementById("modal");
-            modal.style.opacity = '0';
-            modal.style.zIndex = '-1';
-        }
-    </script>
+    <script src="/profileInfo.js"></script>
 </head>
 <body>
     <div class="container1">
@@ -35,6 +23,12 @@
                     <input type="text" name="state" id="state" value={{state}}><br><br>
                     <label for="city">City/town/district: </label><br>
                     <input type="text" name="city" id="city" value={{city}}><br><br>
+                    <label for="expertise">Expertise (maximum 30 characters)</label><br>
+                    <input type="text" name="expertise" id="expertise" onkeyup="countChars(this, 'charNum_expertise')" maxlength="30" value='{{expertise}}'>
+                    <p id="charNum_expertise"></p>
+                    <label for="interests">Interest(s)? (maximum 50 characters)</label><br>
+                    <input type="text" name="interests" id="interests" onkeyup="countChars(this, 'charNum_interest')" placeholder="photography and travel" maxlength="50"  value='{{interests}}'>
+                    <p id="charNum_interest"></p>
                     <button id="save">Save Profile</button>
                 </form>
                 <a onclick="openModal()">Delete account</a>

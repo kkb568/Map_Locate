@@ -38,3 +38,9 @@ function getSelectedCountry() {
     })
     .catch(error => console.log('error', error));
 }
+
+function countChars(obj, valueText) {
+    var strLength = obj.value.length;
+    var text = document.getElementById(valueText);
+    text.innerHTML = '<i>Total: ' + strLength + ' characters</i>';
+}
