@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/style/emailConfirm/emailConfirm.css">
+    <title>Email confirmation</title>
+</head>
+<body>
+    <div class="container">
+        <div class="outer-container">
+            <div class="inner-container">
+                <h2>Email confirmation</h2>
+                <p>A code has been sent to your email address.
+                    Enter the code that has been sent below.</p>
+                <form action="signUpConfirm/{{email}}" method="post">
+                    <label for="code">Code:</label><br>
+                    <input type="text" name="code" required><br><br>
+                    <button>Confirm</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,84 @@
+$ALU-blue: rgb(0, 46, 109);
+
+@font-face {
+    font-family: Montserrat;
+    src: url(Montserrat-Medium.ttf);
+}
+
+body {
+    font-family: Montserrat;
+}
+
+.container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    min-height: 100%;
+    background-color: rgb(213, 234, 255);
+    display: table;
+}
+
+.outer-container {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.inner-container {
+    margin:auto;
+    width: 600px;
+    height: auto;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+
+    h2 {
+        text-align: center;
+    }
+
+    form {
+        margin-left: 20px;
+        
+        input {
+            width: 90%;
+            font-size: large;
+            outline: none;
+        }
+    }
+}
+
+button {
+    position: relative;
+    bottom: 1%;
+    font-family: Montserrat;
+    font-size: large;
+    cursor: pointer;
+    background-color: $ALU-blue;
+    border: none;
+    padding: 10px;
+    color: white;
+    border-radius: 10px;
+    margin-left: 40%;
+    transition: all 0.3s ease;
+}
+
+button:hover {
+    background-color: transparent;
+    color: $ALU-blue;
+    border: 3px solid $ALU-blue;
+}
+
+@media screen and (max-width: 600px) {
+    .inner-container {
+        width: 300px;
+
+        form {
+            margin-left: 10px;
+        }
+    }
+
+    button {
+        margin-left: 30%;
+        margin-bottom: 7%;
+    }
+}

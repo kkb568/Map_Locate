@@ -15,15 +15,26 @@ exports.starting_page = async(req,res) => {
     }
 }
 
+// Render the sign-in confirm page.
+exports.signUp_confirmation = async(req, res) => {
+    try {
+        res.render('signInConfirm', {
+            'email': res.locals.email
+        });
+    } catch (error) {
+        console.log(error.message);
+    }
+}
+
 exports.locateForm_page = async(req,res) => {
     try {
-        var decryptedEmail = decrypt(res.locals.email, encryptionKey).toString();
+        var decryptedEmail = decrypt(req.params.email, encryptionKey).toString();
         db.viewUserByEmail(decryptedEmail)
         .then((record) => {
             // If there is no record, show the locateForm page.
             if (record.length == 0) {
                 res.render('locateForm', {
-                    'email': res.locals.email
+                    'email': req.params.email
                 });
             }
             // If there is a record (user exists), show the mapLocate page directly.
@@ -34,7 +45,7 @@ exports.locateForm_page = async(req,res) => {
                         'userLat': parseFloat(record[0].lat),
                         'userLong': parseFloat(record[0].long),
                         'coordinates': record1,
-                        'encryptedEmail': res.locals.email,
+                        'encryptedEmail': req.params.email,
                         'apiKey': apiKey
                     });
                 })

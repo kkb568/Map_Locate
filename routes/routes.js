@@ -6,6 +6,11 @@ const auth = require('../auth/auth');
 router.get("/", controller.starting_page);
 
 router.post("/signIn", auth.createCookie,
+    auth.createVerificationCode,
+    controller.signUp_confirmation);
+
+router.post("/signUpConfirm/:email", auth.verify,
+    auth.confirmVerificationCode,
     controller.locateForm_page);
 
 router.post("/mapLocatePage/:email", auth.verify,
